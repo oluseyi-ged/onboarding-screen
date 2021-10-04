@@ -7,6 +7,7 @@ import {
   Animated,
   Image,
 } from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 //Constants
 import {images, theme} from '../../constants';
@@ -24,7 +25,7 @@ const onBoardings = [
     img: OnBoarding1,
   },
   {
-    title: 'Why not plan an escape',
+    title: 'Plan an escape',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ratione animi reprehenderit veritatis quaerat',
     img: OnBoarding2,
@@ -38,6 +39,20 @@ const onBoardings = [
 ];
 
 const OnBoarding = () => {
+  const [completed, setCompleted] = React.useState(false);
+  const scrollX = new Animated.Value(0);
+
+  React.useEffect(() => {
+    //to check if user has finished scrolling
+    scrollX.addListener(({value}) => {
+      if (Math.floor(value / SIZES.width) === onBoardings.length - 1) {
+        setCompleted(true);
+      }
+    });
+
+    return () => scrollX.removeListener();
+  }, []);
+
   //Render
   function renderContent() {
     return (
@@ -45,8 +60,16 @@ const OnBoarding = () => {
         horizontal
         pagingEnabled
         scrollEnabled
+        decelerationRate={0}
+        scrollEventThrottle={16}
         snapToAlignment="center"
-        showsHorizontalScrollIndicator={false}>
+        showsHorizontalScrollIndicator={false}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {x: scrollX}}}],
+          {
+            useNativeDriver: false,
+          },
+        )}>
         {onBoardings.map((item, index) => (
           <View key={index} style={{width: SIZES.width}}>
             {/* Image */}
@@ -80,16 +103,69 @@ const OnBoarding = () => {
                 {item.description}
               </Text>
             </View>
+            {/* Button */}
+            <TouchableOpacity
+              style={{
+                // position: 'absolute',
+                bottom: 10,
+                // left: 100,
+                width: 150,
+                height: 60,
+                // paddingLeft: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+                // borderRadius: 30,
+                borderTopRightRadius: 30,
+                borderBottomRightRadius: 30,
+                backgroundColor: COLORS.blue,
+              }}
+              onPress={() => console.log('Button Pressed')}>
+              <Text style={{...FONTS.h1, color: COLORS.white}}>
+                {completed ? 'Proceed' : 'Skip'}
+              </Text>
+            </TouchableOpacity>
           </View>
         ))}
       </Animated.ScrollView>
     );
   }
 
+  function renderDots() {
+    const dotPosition = Animated.divide(scrollX, SIZES.width);
+
+    return (
+      <View style={styles.dotContainer}>
+        {onBoardings.map((item, index) => {
+          const opacity = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [0.3, 1, 0.3],
+            extrapolate: 'clamp',
+          });
+
+          const dotSize = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [SIZES.base, 17, SIZES.base],
+            extrapolate: 'clamp',
+          });
+
+          return (
+            <Animated.View
+              key={`dot-${index}`}
+              opacity={opacity}
+              style={[
+                styles.dot,
+                {width: dotSize, height: dotSize},
+              ]}></Animated.View>
+          );
+        })}
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View>{renderContent()}</View>
-      <View>{renderDots()}</View>
+      <View style={styles.dotsRootContainer}>{renderDots()}</View>
     </SafeAreaView>
   );
 };
@@ -102,5 +178,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.white,
+  },
+  dotsRootContainer: {
+    position: 'absolute',
+    bottom: SIZES.height > 700 ? '25%' : '20%',
+  },
+  dotContainer: {
+    flexDirection: 'row',
+    height: SIZES.padding,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  dot: {
+    borderRadius: SIZES.radius,
+    backgroundColor: COLORS.blue,
+    marginHorizontal: SIZES.radius / 2,
   },
 });
