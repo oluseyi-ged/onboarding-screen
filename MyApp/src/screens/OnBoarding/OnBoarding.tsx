@@ -20,20 +20,17 @@ const {COLORS, FONTS, SIZES} = theme;
 const onBoardings = [
   {
     title: 'Want to Japa?',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ratione animi reprehenderit veritatis quaerat',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     img: OnBoarding1,
   },
   {
     title: 'Plan an escape',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ratione animi reprehenderit veritatis quaerat',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     img: OnBoarding2,
   },
   {
     title: 'Destination CANADA!!!',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ratione animi reprehenderit veritatis quaerat',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     img: OnBoarding3,
   },
 ];
