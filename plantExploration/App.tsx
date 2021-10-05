@@ -14,7 +14,11 @@ const App = () => {
         screenOptions={{headerShown: false}}
         initialRouteName={'Home'}>
         {/* Tabs */}
-        <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen
+          name="Home"
+          component={Tabs}
+          options={{headerShown: false}}
+        />
 
         {/* Screens */}
         <Stack.Screen

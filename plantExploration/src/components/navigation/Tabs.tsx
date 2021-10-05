@@ -80,11 +80,23 @@ const Tabs = () => {
           }
         },
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Box" component={Home} />
-      <Tab.Screen name="Camera" component={Home} />
-      <Tab.Screen name="Search" component={Home} />
-      <Tab.Screen name="Favourite" component={Home} />
+      <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
+      <Tab.Screen name="Box" component={Home} options={{headerShown: false}} />
+      <Tab.Screen
+        name="Camera"
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Favourite"
+        component={Home}
+        options={{headerShown: false}}
+      />
     </Tab.Navigator>
   );
 };
