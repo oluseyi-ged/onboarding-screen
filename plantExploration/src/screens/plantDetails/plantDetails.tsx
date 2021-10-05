@@ -52,6 +52,40 @@ const RequirementsBar = ({icon, barPercentage}) => {
   );
 };
 
+const RequirementDetail = ({icon, label, detail}) => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+      }}>
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <Image
+          source={icon}
+          resizeMode="cover"
+          style={{
+            tintColor: COLORS.secondary,
+            width: 30,
+            height: 30,
+          }}
+        />
+        <Text
+          style={{
+            marginLeft: SIZES.base,
+            color: COLORS.secondary,
+            ...FONTS.h2,
+          }}>
+          {label}
+        </Text>
+      </View>
+      <View style={{flex: 1, alignItems: 'flex-end'}}>
+        <Text style={{marginLeft: SIZES.base, color: COLORS.gray, ...FONTS.h2}}>
+          {detail}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 const plantDetails = () => {
   //Render
 
@@ -69,6 +103,36 @@ const plantDetails = () => {
         <RequirementsBar icon={icons.temperature} barPercentage="90%" />
         <RequirementsBar icon={icons.garden} barPercentage="20%" />
         <RequirementsBar icon={icons.seed} barPercentage="60%" />
+      </View>
+    );
+  }
+
+  function renderRequirements() {
+    return (
+      <View
+        style={{
+          flex: 2.5,
+          marginTop: SIZES.padding,
+          paddingHorizontal: SIZES.padding,
+          justifyContent: 'space-around',
+        }}>
+        <RequirementDetail icon={icons.sun} label="Sunlight" detail="15°C" />
+        <RequirementDetail
+          icon={icons.drop}
+          label="Water"
+          detail="250ML Daily"
+        />
+        <RequirementDetail
+          icon={icons.temperature}
+          label="Room Temp"
+          detail="25°C"
+        />
+        <RequirementDetail icon={icons.garden} label="Soil" detail="3 Kg" />
+        <RequirementDetail
+          icon={icons.seed}
+          label="Fertilizer"
+          detail="150 Kg"
+        />
       </View>
     );
   }
@@ -106,6 +170,8 @@ const plantDetails = () => {
           Requirements
         </Text>
         {renderRequirementsBar()}
+
+        {renderRequirements()}
       </View>
     </View>
   );
