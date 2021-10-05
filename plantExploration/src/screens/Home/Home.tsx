@@ -332,7 +332,9 @@ const Home = () => {
                   alignItems: 'center',
                   justifyContent: 'flex-end',
                 }}>
-                <Text>Add New</Text>
+                <Text style={{color: COLORS.secondary, ...FONTS.body3}}>
+                  Add New
+                </Text>
                 <TouchableOpacity
                   style={{
                     marginLeft: SIZES.base,
