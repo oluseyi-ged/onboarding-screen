@@ -11,6 +11,29 @@ const tabOptions = {
   style: {height: '10%'},
 };
 
+const CameraButton = () => {
+  return (
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: COLORS.primary,
+      }}>
+      <Image
+        source={icons.camera}
+        resizeMode="contain"
+        style={{
+          width: 23,
+          height: 23,
+        }}
+      />
+    </View>
+  );
+};
+
 const Tabs = () => {
   return (
     <Tab.Navigator
@@ -37,13 +60,7 @@ const Tabs = () => {
                 />
               );
             case 'Camera':
-              return (
-                <Image
-                  source={icons.camera}
-                  resizeMode="contain"
-                  style={{tintColor: tintColor, width: 25, height: 25}}
-                />
-              );
+              return <CameraButton />;
             case 'Search':
               return (
                 <Image
