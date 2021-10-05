@@ -3,7 +3,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 
-const Home = () => {
+const Home = ({navigation}) => {
   //Dummy Data
   const [newPlants, setNewPlants] = React.useState([
     {
@@ -189,7 +189,7 @@ const Home = () => {
               <Text style={{color: COLORS.white, ...FONTS.h2}}>New Plants</Text>
               <TouchableOpacity
                 onPress={() => {
-                  console.log('focus on password');
+                  navigation.navigate('plantDetails');
                 }}>
                 <Image
                   source={icons.focus}
@@ -231,7 +231,10 @@ const Home = () => {
               <Text style={{color: COLORS.secondary, ...FONTS.h2}}>
                 Today's Share
               </Text>
-              <TouchableOpacity onPress={console.log('see all on press')}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('plantDetails');
+                }}>
                 <Text style={{color: COLORS.secondary, ...FONTS.body3}}>
                   See All
                 </Text>
@@ -346,7 +349,7 @@ const Home = () => {
                     backgroundColor: COLORS.gray,
                   }}
                   onPress={() => {
-                    console.log('add friend press');
+                    navigation.navigate('plantDetails');
                   }}>
                   <Image
                     source={icons.plus}
