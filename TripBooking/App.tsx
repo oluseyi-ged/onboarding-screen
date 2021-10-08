@@ -6,6 +6,9 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 // /screens
 
 import {Onboarding, DestinationDetail, Home} from './src/screens';
+//Tabs
+import Tabs from 'navigation/tabs';
+
 import {COLORS, SIZES, icons} from './src/constants';
 
 const theme = {
@@ -48,11 +51,14 @@ const App = () => {
             },
           }}
         />
+
+        {/* Tabs */}
+        <Stack.Screen name="Home" component={Tabs}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default App;
-
-const styles = StyleSheet.create({});
+export default () => {
+  return <App />;
+};

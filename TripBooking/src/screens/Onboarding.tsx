@@ -1,43 +1,35 @@
-import {COLORS, FONTS, images, SIZES} from '../constants';
 import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
+  View,
+  Text,
   Image,
   TouchableOpacity,
-  Text,
-  View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const Onboarding = () => {
+import {images, COLORS, FONTS, SIZES} from '../constants';
+
+const Onboarding = ({navigation}) => {
+  // Render
+
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Image
           source={images.onboardingImage}
           resizeMode="contain"
-          style={{width: '100%', height: '100%'}}
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
         />
       </View>
 
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <View
-          style={{
-            alignItems: 'center',
-            marginHorizontal: SIZES.padding,
-          }}>
-          <Text style={{...FONTS.h2, color: COLORS.black}}>Digital Ticket</Text>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{alignItems: 'center', marginHorizontal: SIZES.padding}}>
+          <Text style={{...FONTS.h2}}>Digital Ticket</Text>
           <Text
             style={{
               color: COLORS.gray,
@@ -46,7 +38,7 @@ const Onboarding = () => {
               ...FONTS.body3,
             }}>
             Easy solution to buy tickets for your travel, business trips,
-            transportation, lodging and culinary
+            transportation, lodging and culinary.
           </Text>
         </View>
 
@@ -61,7 +53,7 @@ const Onboarding = () => {
               justifyContent: 'center',
             },
           ]}
-          onPress={() => console.log('button pressed')}>
+          onPress={() => navigation.navigate('Home')}>
           <LinearGradient
             style={{
               height: '100%',
@@ -72,7 +64,7 @@ const Onboarding = () => {
             }}
             colors={['#46aeff', '#5884ff']}
             start={{x: 0, y: 0}}
-            end={{x: 1, y: 1}}>
+            end={{x: 1, y: 0}}>
             <Text style={{color: COLORS.white, ...FONTS.h3}}>Start !</Text>
           </LinearGradient>
         </TouchableOpacity>
@@ -80,8 +72,6 @@ const Onboarding = () => {
     </SafeAreaView>
   );
 };
-
-export default Onboarding;
 
 const styles = StyleSheet.create({
   container: {
@@ -96,6 +86,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+
     elevation: 5,
   },
 });
+
+export default Onboarding;
